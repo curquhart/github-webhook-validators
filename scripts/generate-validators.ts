@@ -40,7 +40,7 @@ const generateValidator = (keyPath: KeyPath, jsPath: string, name?: string, isRe
   }
   if (keyPath['object']) {
     if (name !== undefined && tw.typeNames.indexOf(name) !== -1) {
-      body += `is${name}(${jsPath}) || `;
+      body += `exports.is${name}(${jsPath}) || `;
     }
     else {
       body += `(typeof ${jsPath} === 'object' && ${jsPath} !== null`;
@@ -83,7 +83,7 @@ const generateValidatorWithReturn = (keyPath: KeyPath): string => {
 };
 
 const generateValidators = (): string => {
-  return tw.typeNames.map(name => `export function is${name}(input) {\n${generateValidatorWithReturn(tw.keypaths[name])}\n }`).join('\n');
+  return tw.typeNames.map(name => `exports.is${name} = function(input) {\n${generateValidatorWithReturn(tw.keypaths[name])}\n }`).join('\n');
 };
 
 const definition = `
