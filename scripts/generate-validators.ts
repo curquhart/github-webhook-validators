@@ -67,9 +67,14 @@ const generateValidator = (keyPath: KeyPath, jsPath: string, name?: string, isRe
   if (keyPath['array']) {
     body += '(';
     body += `Array.isArray(${jsPath})`;
-    // if (subKp['array']['[]']) {
-    //   body += `(() => { for (const item of input['${innerName}']) {`;
-    // }
+    if (keyPath['array']['[]']) {
+      const innerOpts = keyPath['array']['[]'];
+      const innerKeyPath = tw.keypaths[keyPath['array']['[]'].keypath];
+      if (innerKeyPath !== undefined) {
+        const validator = generateValidator(innerKeyPath, 'entry', innerOpts.keypath, innerOpts.required);
+        body += `&& ${jsPath}.find(entry => (${validator}) === false) === undefined`;
+      }
+    }
     body += ') || ';
   }
 
