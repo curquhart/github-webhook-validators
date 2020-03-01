@@ -1,0 +1,38 @@
+{
+  "name": "github-webhook-validators",
+  "version": "1.0.0",
+  "description": "GitHub webhook event validators for Node.js",
+  "main": "index.js",
+  "scripts": {
+    "build": "ts-node scripts/generate-validators.ts",
+    "lint": "eslint --ext .ts scripts/",
+    "prepack": "npm run lint && npm run build"
+  },
+  "dependencies": {
+    "@octokit/webhooks": "7.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/curquhart/github-webhook-validators.git"
+  },
+  "engines": {
+    "node": ">=11.13.0"
+  },
+  "author": "Chelsea Urquhart (https://www.linkedin.com/in/chelsea-urquhart/)",
+  "license": "MIT",
+  "types": "index.d.ts",
+  "devDependencies": {
+    "eslint": "6.8.0",
+    "@typescript-eslint/eslint-plugin": "2.21.0",
+    "@typescript-eslint/parser": "2.21.0",
+    "eslint-plugin-node": "11.0.0",
+    "@types/node": "13.7.7",
+    "ts-node": "8.6.2",
+    "typescript": "3.8.3",
+    "pascal-case": "3.1.1",
+    "prettier": "1.19.0",
+    "@types/prettier": "1.19.0",
+    "@octokit/webhooks-definitions": "3.3.0",
+    "@gimenete/type-writer": "0.1.4"
+  }
+}
